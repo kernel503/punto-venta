@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DeleteProductoRequest;
 use App\Http\Requests\StoreProductoRequest;
 use App\Http\Requests\UpdateProductoRequest;
+use App\Http\Resources\ProductoCollection;
 use App\Producto;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 class ProductoController extends Controller
@@ -18,7 +18,12 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        // dd(Producto::all());
+        $data = ProductoCollection::collection(Producto::all());
+        return response()->json(['data' =>  $data]);
+
+
+        // return ProductoCollection::collection(Producto::all());
     }
 
     /**

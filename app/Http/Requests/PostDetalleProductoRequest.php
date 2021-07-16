@@ -27,7 +27,7 @@ class PostDetalleProductoRequest extends FormRequest
         return [
             'producto_id' => 'required|exists:producto,id',
             'precio_unitario' => 'required|numeric',
-            'cantidad_disponible' => 'required|numeric',
+            'cantidad_disponible' => 'required|integer',
             'detalle' => 'required',
             'ubicacion' => 'required'
         ];
@@ -46,7 +46,7 @@ class PostDetalleProductoRequest extends FormRequest
             'precio_unitario.required' => 'El precio unitario es necesario',
             'precio_unitario.numeric' => 'El precio unitario debe ser númerico',
             'cantidad_disponible.required' => 'La cantidad es necesaria',
-            'cantidad_disponible.numeric' => 'La cantidad debe ser númerico',
+            'cantidad_disponible.integer' => 'La cantidad debe ser un entero',
             'detalle.required' => 'El campo detalle es necesario',
             'ubicacion.required' => 'El campo ubicacion es necesario',
         ];

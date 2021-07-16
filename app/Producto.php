@@ -28,7 +28,7 @@ class Producto extends Model
     public $timestamps = true;
 
     /**
-     * Obtiene los detalle del producto.
+     * Obtiene detalle del producto.
      */
     public function detalle_producto()
     {
