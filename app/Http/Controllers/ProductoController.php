@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeleteProductoRequest;
+use App\Http\Requests\StoreProductoRequest;
+use App\Http\Requests\UpdateProductoRequest;
 use App\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class ProductoController extends Controller
 {
@@ -18,46 +22,15 @@ class ProductoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductoRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Producto  $producto
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Producto $producto)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Producto  $producto
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Producto $producto)
-    {
-        //
+        Producto::create($request->validated());
+        return response()->json(['message' => 'Producto agregado']);
     }
 
     /**
@@ -67,9 +40,12 @@ class ProductoController extends Controller
      * @param  \App\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(UpdateProductoRequest $request)
     {
-        //
+        $data = $request->validated();
+        Producto::where(['id' => Arr::get($data, 'id')])
+            ->update(Arr::except($data, 'id'));
+        return response()->json(['message' => 'Producto actualizado']);
     }
 
     /**
@@ -78,8 +54,9 @@ class ProductoController extends Controller
      * @param  \App\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Producto $producto)
+    public function destroy(DeleteProductoRequest $request)
     {
-        //
+        Producto::find(Arr::get($request->validated(), 'id'))->delete();
+        return response()->json(['message' => 'Producto eliminado']);
     }
 }

@@ -30,10 +30,10 @@ class UserSeeder extends Seeder
             'created_at' => date('Y-m-d H:i:s')
         ]);
 
-        $admin = User::where('email', 'admin@gmail.com')->first();
-        $admin->createToken('administrador');
+        // $admin = User::where('email', 'admin@gmail.com')->first();
+        // $admin->createToken('administrador');
 
-        $usuario = User::where('email', 'carlos@gmail.com')->first();
-        $usuario->createToken('cliente');
+        // $usuario = User::where('email', 'carlos@gmail.com')->first();
+        // $usuario->createToken('cliente');
     }
 }
